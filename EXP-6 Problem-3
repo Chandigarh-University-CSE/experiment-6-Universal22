@@ -1,0 +1,20 @@
+3.Perfect Squares
+Code:-
+class Solution:
+    def numSquares(self, n: int) -> int:
+        dp = [float('inf')] * (n + 1)
+        dp[0] = 0  
+        perfect_squares = []
+        i = 1
+        while i * i <= n:
+            perfect_squares.append(i * i)
+            i += 1
+        for i in range(1, n + 1):
+            for square in perfect_squares:
+                if i < square:
+                    break
+                dp[i] = min(dp[i], dp[i - square] + 1)
+        return dp[n]
+solution = Solution()
+print(solution.numSquares(12))  
+print(solution.numSquares(13))  
